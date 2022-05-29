@@ -1,11 +1,11 @@
 # mini-proejct-react-jpa-
 
-2022-05-29 대강 예측
+2022-05-29 기준 대충 계획
 
-1. react 프론트 만들기
+1. react 공부하기
  npx create-react-app (bolider plate)로 설치하기
 
-
+=> 현재 한입 크기로 잘라먹는 react공부중....  6/10일까지 마무리 예상
 
  => 디자인 선정, 배치 선정, 
  component 구조 나누기 
