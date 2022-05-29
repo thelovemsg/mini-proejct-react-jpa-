@@ -3,6 +3,10 @@
 2022-05-29 대강 예측
 
 1. react 프론트 만들기
+ npx create-react-app (bolider plate)로 설치하기
+
+
+
  => 디자인 선정, 배치 선정, 
  component 구조 나누기 
  적용사항 정리
