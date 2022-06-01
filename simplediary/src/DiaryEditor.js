@@ -1,6 +1,10 @@
-import { useRef, useState } from "react";
+import React, {useContext, useEffect, useRef, useState } from "react";
+import { DiaryDispatchContext } from "./App";
 
-const DairyEditor = ({ onCreate }) => {
+const DairyEditor = () => {
+
+  const {onCreate}  = useContext (DiaryDispatchContext)
+
   const authorInput = useRef();
   const contentInput = useRef();
 
@@ -78,4 +82,4 @@ const DairyEditor = ({ onCreate }) => {
   );
 };
 
-export default DairyEditor;
+export default React.memo(DairyEditor);
