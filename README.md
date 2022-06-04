@@ -7,7 +7,10 @@
 firebase를 이용해서 간단하게 배포 예정. 사이트 주소는 추후 정리할 것임.
 
 테이블 설계는 cloud erd를 이용해서 계속 업데이트 예정
+
 주소 : https://www.erdcloud.com/d/upPqDABfZ4CeBHHkN
+
+실제 react 로 구현한 front부분과 spring 으로 만든 backend는 react-spring이라는 폴더 안에 정리할 예정
 
 1. react 공부하기
  npx create-react-app (bolider plate)로 설치하기
