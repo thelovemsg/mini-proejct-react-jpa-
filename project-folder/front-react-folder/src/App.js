@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import CustomRight from "./components/page/structure/CustomRight.js";
+import CustomFooter from "./components/page/structure/CustomFooter.js";
+import CustomContent from "./components/page/structure/CustomContent.js";
+import CustomHeader from "./components/page/structure/CustomHeader.js";
+import {
+  ContentStyle,
+  FooterStyle,
+  HeaderStyle,
+  SiderStyle,
+  MiddleWarpper,
+  BodyWrapper,
+  BodyLimitWrapper,
+} from "./components/style/CusPageStyle.js";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+let bool = true;
+const App = () => (
+  <BodyWrapper>
+    <BodyLimitWrapper>
+      <HeaderStyle>
+        <CustomHeader />
+      </HeaderStyle>
+      <MiddleWarpper>
+        <ContentStyle>
+          {bool ? (
+            <CustomContent title="text1" />
+          ) : (
+            <CustomContent title="text2" />
+          )}
+        </ContentStyle>
+        <SiderStyle>
+          <CustomRight />
+        </SiderStyle>
+      </MiddleWarpper>
+      <FooterStyle>
+        <CustomFooter />
+      </FooterStyle>
+    </BodyLimitWrapper>
+  </BodyWrapper>
+);
 
 export default App;
