@@ -10,6 +10,8 @@ firebase를 이용해서 간단하게 배포 예정. 사이트 주소는 추후 
 
 주소 : https://www.erdcloud.com/d/upPqDABfZ4CeBHHkN
 
+React 학습 내용 정리 : https://tech-monster.tistory.com/category/programming%20language/react
+
 //전체 예상 계획
 
 실제 react 로 구현한 front부분과 spring 으로 만든 backend는 react-spring이라는 폴더 안에 정리할 예정
