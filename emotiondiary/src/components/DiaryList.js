@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DiaryItem from "./DiaryItem";
 import MyButton from "./MyButton";
@@ -14,7 +14,9 @@ const fileterOptionList = [
   { value: "bad", name: "안좋은 감정만" },
 ];
 
-const ControlMenu = ({ value, onChange, optionList }) => {
+//React.memo로 component를 감싸면 강화된 component를 돌려주는 고차 component가 된다.
+//전달받는 prop이 값이 바뀌지 않으면 renderting이 일어나지 않게 memoization해주는 성능 최적화를 도와준다.
+const ControlMenu = React.memo(({ value, onChange, optionList }) => {
   return (
     <select
       className="ControlMenu"
@@ -28,10 +30,23 @@ const ControlMenu = ({ value, onChange, optionList }) => {
       ))}
     </select>
   );
-};
+});
 
 const DiaryList = ({ diaryList }) => {
+  const [sortType, setSortType] = useState("latest");
   const navigate = useNavigate();
+  const [filter, setFilter] = useState("all");
+
+  //component가 rerendering될 때 함수도 새로 생겨남
+  // 그래서 react.memo에서 비교를 했을 때 다른 prop이랑 비교를 하게 되서 다시 rerendering하는거임
+  const handleSetSortType = (sortType) => {
+    setSortType(sortType);
+  };
+
+  const handleSetFilter = (filter) => {
+    setFilter(filter);
+  };
+
   const filterCallBack = (item) => {
     if (filter === "good") {
       return parseInt(item.emotion) <= 3;
@@ -39,9 +54,6 @@ const DiaryList = ({ diaryList }) => {
       return parseInt(item.emotion) > 3;
     }
   };
-
-  const [sortType, setSortType] = useState("latest");
-  const [filter, setFilter] = useState("all");
 
   const getProcessedDiaryList = () => {
     const compare = (a, b) => {
@@ -57,6 +69,7 @@ const DiaryList = ({ diaryList }) => {
       filter === "all" ? copyList : copyList.filter((it) => filterCallBack(it));
 
     const sortedList = filteredList.sort(compare);
+    console.log("sortedList : ", sortedList);
     return sortedList;
   };
 

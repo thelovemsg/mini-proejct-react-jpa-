@@ -1,12 +1,18 @@
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import MyButton from "./MyButton";
-
 const DiaryItem = ({ id, emotion, content, date }) => {
+  console.log('diaryItem :: ', id);
   const navigate = useNavigate();
   const env = process.env;
   env.PUBLIC_URL = env.PUBLIC_URL || "";
 
   const srtDate = new Date(parseInt(date)).toLocaleDateString();
+
+  useEffect(() => {
+    const titleElement = document.getElementsByTagName("title")[0];
+    titleElement.innerHTML = `감정 일기장`;
+  }, []);
 
   const goDetail = () => {
     navigate(`/diary/${id}`);
@@ -38,4 +44,4 @@ const DiaryItem = ({ id, emotion, content, date }) => {
   );
 };
 
-export default DiaryItem;
+export default React.memo(DiaryItem);

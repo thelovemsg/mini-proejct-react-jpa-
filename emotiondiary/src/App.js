@@ -1,4 +1,4 @@
-import React, { useRef, useReducer } from "react";
+import React, { useRef, useReducer, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import "./App.css";
@@ -18,63 +18,44 @@ const reducer = (state, action) => {
       return action.data;
     }
     case "CREATE": {
-      newState = [...action.data, ...state];
+      newState = [action.data, ...state];
       break;
     }
     case "REMOVE": {
       newState = state.filter((it) => it.id !== action.targetId);
+      break;
     }
     case "EDIT": {
       newState = state.map((it) =>
-        it.id === action.data.id ? { ...action.data } : it
+        it.id === action.targetId ? { ...action.data } : it
       );
       break;
     }
     default:
       return state;
   }
+  localStorage.setItem("diary", JSON.stringify(newState));
   return newState;
 };
 
 export const DiaryStateContext = React.createContext();
 export const DiaryDispatchContext = React.createContext();
 
-const dummyData = [
-  {
-    id: 1,
-    emotion: 1,
-    content: "일기 1",
-    date: 1654074341354,
-  },
-  {
-    id: 2,
-    emotion: 2,
-    content: "일기 2",
-    date: 1654074341356,
-  },
-  {
-    id: 3,
-    emotion: 3,
-    content: "일기 3",
-    date: 1654074341357,
-  },
-  {
-    id: 4,
-    emotion: 4,
-    content: "일기 4",
-    date: 1654074341358,
-  },
-  {
-    id: 5,
-    emotion: 5,
-    content: "일기 5",
-    date: 1654074341359,
-  },
-];
-
 function App() {
-  const [data, dispatch] = useReducer(reducer, dummyData);
-  console.log(new Date().getTime());
+  const [data, dispatch] = useReducer(reducer, []);
+  useEffect(() => {
+    const localData = localStorage.getItem("diary");
+    if (localData) {
+      const diaryList = JSON.parse(localData).sort(
+        (a, b) => parseInt(b.id) - parseInt(a.id)
+      );
+
+      if (diaryList.length >= 1) {
+        dataId.current = parseInt(diaryList[0].id) + 1;
+        dispatch({ type: "INIT", data: diaryList });
+      }
+    }
+  }, []);
   const dataId = useRef(0);
   // CREATE
   const onCreate = (date, content, emotion) => {
@@ -82,7 +63,7 @@ function App() {
       type: "CREATE",
       data: {
         id: dataId.current,
-        date: new Date(date).getTime(),
+        date: new Date().getTime(),
         content,
         emotion,
       },
@@ -99,7 +80,6 @@ function App() {
       type: "EDIT",
       data: {
         id: targetId,
-        date: new Date(date).getTime(),
         content,
         emotion,
       },
@@ -120,7 +100,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/new" element={<New />} />
-              <Route path="/edit" element={<Edit />} />
+              <Route path="/edit/:id" element={<Edit />} />
               <Route path="/diary/:id" element={<Diary />} />
             </Routes>
           </div>
