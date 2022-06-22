@@ -10,6 +10,8 @@ firebase를 이용해서 간단하게 배포 예정. 사이트 주소는 추후 
 
 주소 : https://www.erdcloud.com/d/upPqDABfZ4CeBHHkN
 
+React 학습 내용 정리 : https://tech-monster.tistory.com/category/programming%20language/react
+
 //전체 예상 계획
 
 실제 react 로 구현한 front부분과 spring 으로 만든 backend는 react-spring이라는 폴더 안에 정리할 예정
@@ -62,3 +64,16 @@ firebase를 이용해서 간단하게 배포 예정. 사이트 주소는 추후 
 Redux-saga를 통해 적용 할 예정이기에 이를 위해서 선행 지식이 제대로 자리잡지 않았음.
 
 고로 다시 학습하고 있는 중...
+
+React로 프로젝트를 만드는데 무엇보다 중요한 것은 전체적인 component 배치를 결정하는 것이라고 깨달았다.
+
+어느 배치에 잘 해놓느냐에 따라 re-rendering 관리라던지, 최적화 문제와 직결되기 때문이다. 
+
+현재 다시 react 프로젝트의 경우 삭제를 했다. 그 이유는 배치라던지, 전체적인 윤곽을 어떻게 결정해야할지를 갈피를 못 잡았기 때문이다.
+
+-------------------------
+06/19 기준
+
+SSR 구현에 있어서 기존의 React의 경우 설정이 너무 복잡해서 Next.js를 어떻게 사용하는지 학습중이다. 
+
+예상 학습 기간 => 7월 첫째주 까지 하는것이 목표
