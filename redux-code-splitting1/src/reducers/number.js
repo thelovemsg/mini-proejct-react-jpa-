@@ -20,12 +20,17 @@ export const subNumberAction = (data) => {
     data,
   };
 };
+export const mulNumberAction = (data) => ({ type: MUL_NUMBER, data });
 
-export const mulNumberAction = (data) => {
-  return {
-    type: MUL_NUMBER,
-    data,
+export const mulNumberActionThunk = (data) => {
+  return (dispatch, getState) => {
+    const state = getState();
+    dispatch(mulNumberAction(data));
   };
+};
+
+export const mulNumberAsync = () => (dispatch) => {
+  setTimeout(() => dispatch(mulNumberActionThunk(2)), 1000);
 };
 
 export const divNumberAction = (data) => {

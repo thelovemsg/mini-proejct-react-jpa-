@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addNumberAction,
   divNumberAction,
-  mulNumberAction,
+  mulNumberAsync,
   selectNumber,
   subNumberAction,
 } from "./reducers/number";
@@ -30,7 +30,7 @@ const Counter = () => {
         <Button
           type="primary"
           style={{ marginRight: 20 }}
-          onClick={() => dispatch(mulNumberAction(2))}
+          onClick={() => dispatch(mulNumberAsync())}
         >
           multiply number
         </Button>
