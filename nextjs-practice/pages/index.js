@@ -1,25 +1,37 @@
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
+import { getSortedPostsData } from "./lib/post";
 
-export default function Home() {
+export async function getStaticProps() {
+  const allPostsData = getSortedPostsData();
+  return {
+    props: {
+      allPostsData,
+    },
+  };
+}
+
+export default function Home({ allPostsData }) {
   return (
-    <div className="container">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <div>main page</div>
-      <div>
-        <a href="/post">this page!</a>
-        <br />
-        <Link href="/post">
-          <a>this page 222!!</a>
-        </Link>
-      </div>
-      <div>
-        <Image src="/image.png" width="500" height="500" />
-      </div>
-    </div>
+    <Layout home>
+      {/* Keep the existing code here */}
+
+      {/* Add this <section> tag below the existing <section> tag */}
+      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+        <h2 className={utilStyles.headingLg}>Blog</h2>
+        <ul className={utilStyles.list}>
+          {allPostsData.map(({ id, date, title }) => (
+            <li className={utilStyles.listItem} key={id}>
+              {title}
+              <br />
+              {id}
+              <br />
+              {date}
+            </li>
+          ))}
+        </ul>
+      </section>
+    </Layout>
   );
 }

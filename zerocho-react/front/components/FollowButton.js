@@ -1,16 +1,15 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Button } from "antd";
 import PropTypes from "prop-types";
-import { vi } from "faker/lib/locales";
-import { FOLLOW_REQUEST, UNFOLLOW_REQUEST } from "../reducers/user";
 import { useSelector, useDispatch } from "react-redux";
+import { FOLLOW_REQUEST, UNFOLLOW_REQUEST } from "../reducers/user";
 
 const FollowButton = ({ post }) => {
   const dispatch = useDispatch();
-  const { me, followLoading, unfollowLoading } = useCallback(
+  const { me, followLoading, unfollowLoading } = useSelector(
     (state) => state.user
   );
-  const isFollowing = me && me.Followings.find((v) => v.id === post.User.id);
+  const isFollowing = me?.Followings.find((v) => v.id === post.User.id);
   const onClickButton = useCallback(() => {
     if (isFollowing) {
       dispatch({
@@ -24,15 +23,14 @@ const FollowButton = ({ post }) => {
       });
     }
   }, [isFollowing]);
+
+  if (post.User.id === me.id) {
+    return null;
+  }
   return (
-    <>
-      <Button
-        loading={followLoading || unfollowLoading}
-        onClick={onClickButton}
-      >
-        {isFollowing ? "언팔로우" : "팔로우"}
-      </Button>
-    </>
+    <Button loading={followLoading || unfollowLoading} onClick={onClickButton}>
+      {isFollowing ? "언팔로우" : "팔로우"}
+    </Button>
   );
 };
 

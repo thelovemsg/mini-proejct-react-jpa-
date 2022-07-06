@@ -1,49 +1,37 @@
+import React from "react";
 import PropTypes from "prop-types";
 import Link from "next/link";
-import React from "react";
 import { Menu, Input, Row, Col } from "antd";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+
 import UserProfile from "./UserProfile";
 import LoginForm from "./LoginForm";
-import { useSelector } from "react-redux";
-import { createGlobalStyle } from "styled-components";
+
 const SearchInput = styled(Input.Search)`
-  vertical-align: center;
-`;
-const Global = createGlobalStyle`
-  .ant-row {
-    margin-right: 0 ! important;
-    margin-left: 0 !important;
-  }
-
-  .ant-col:first-child{
-    padding-left: 0 !important;
-  }
-
-  .ant-col:last-child{
-    padding-right: 0 !important;
-  }
-
+  vertical-align: middle;
 `;
 
 const AppLayout = ({ children }) => {
-  const { logInDone } = useSelector((state) => state.user);
+  const { me } = useSelector((state) => state.user);
+
   return (
     <div>
-      <Global />
       <Menu mode="horizontal">
-        <Menu.Item key="1">
+        <Menu.Item>
           <Link href="/">
             <a>노드버드</a>
           </Link>
         </Menu.Item>
-        <Menu.Item key="2">
+        <Menu.Item>
           <Link href="/profile">
             <a>프로필</a>
           </Link>
         </Menu.Item>
-        <Menu.Item key="3">
-          <SearchInput enterButton style={{ verticalAlign: "middle" }} />
+        <Menu.Item>
+          <SearchInput enterButton />
+        </Menu.Item>
+        <Menu.Item>
           <Link href="/signup">
             <a>회원가입</a>
           </Link>
@@ -51,18 +39,18 @@ const AppLayout = ({ children }) => {
       </Menu>
       <Row gutter={8}>
         <Col xs={24} md={6}>
-          {logInDone ? <UserProfile /> : <LoginForm />}
+          {me ? <UserProfile /> : <LoginForm />}
         </Col>
         <Col xs={24} md={12}>
           {children}
         </Col>
         <Col xs={24} md={6}>
           <a
-            href="https://tech-monster.tistory.com/"
+            href="https://www.zerocho.com"
             target="_blank"
             rel="noreferrer noopener"
           >
-            made by 공대키메라
+            Made by ZeroCho
           </a>
         </Col>
       </Row>
@@ -74,4 +62,4 @@ AppLayout.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default React.memo(AppLayout);
+export default AppLayout;
