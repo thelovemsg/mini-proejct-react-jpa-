@@ -8,7 +8,7 @@ import rootReducer from "./reducers";
 import { composeWithDevTools } from "redux-devtools-extension";
 import createSagaMiddleware from "redux-saga";
 import myLogger from "./Logger/MyLogger";
-import rootSaga from "./saga";
+import rootSaga from "./sagas";
 const sagaMiddleware = createSagaMiddleware();
 
 const middlewares = [myLogger, sagaMiddleware];
