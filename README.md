@@ -87,3 +87,17 @@ Next.js 공부중
    7월 중순까지 공부 완료 후 Spring security 탐독 예정
    혹은 front 개발부터 하기 
 
+----------------------------
+07/13 기준
+
+Next.js SSR 까지 습 완료.
+여기까지 배운 React, Next.js 를 바탕으로 front  개발 예정. 
+ => 추후 RTK Query, React Query등 여러 비동기 db 접근 라이브러리 적용 예정
+
+Spring Security에 대한 새로운 학습 진행 예정
+
+학습을 통해 이루고자 하는 것의 목표는...
+
+1. front 서버와 backend서버의 원활한 로그인
+2. jwt를 활용한 로그인 보안 강화
+3. 최신 버전에 맞는 Spring Security 적용법 학습
